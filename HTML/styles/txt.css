@@ -1,0 +1,50 @@
+.a-title
+{
+font-family: Arial, Helvetica, sans-serif;
+font-size: 20px; 
+
+}
+.b-title
+{
+    color: grey;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10px;
+    
+}
+.c-title
+{
+    margin-top: 4px;
+    color: rgb(6, 138, 6);
+    font-family: Arial, Helvetica, sans-serif;
+   font-size: 10px;
+   cursor: pointer;
+}
+.d-title, .e-title {
+    display: inline-block; /* Umożliwia wyświetlanie w tej samej linii */
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10px;
+    padding-bottom: 10px; /* Podnosi elementy o 10 pikseli */
+
+}
+
+.d-title {
+    color: gray; /* Kolor dla d-title */
+}
+
+.e-title {
+    color: red; /* Kolor dla e-title */
+    cursor: pointer;
+}
+
+.e-title:hover
+{
+    text-decoration: underline;
+    
+}
+
+.c-title:hover
+{
+    text-decoration: underline;
+}
+
+

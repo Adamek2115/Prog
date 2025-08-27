@@ -1,0 +1,25 @@
+.my-gg
+{
+color: rgb(241, 241, 241);
+cursor: pointer;
+font-family:Arial, sans-serif;
+font-size: 16px;
+text-size-adjust: 100%;
+font-weight: bold;
+line-height: 1.5;
+text-wrap: wrap;
+}
+.KS
+{
+    margin-left: 20px ;
+    padding-right: 1.400px;
+    margin-right: -1.4px;
+    color: rgb(179, 179, 179);
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-decoration: solid;
+}
+body {
+    background-color: black; /* Ustawia kolor tła na czarny */
+    color: white; /* Ustawia kolor tekstu na biały, aby był widoczny na czarnym tle */
+}

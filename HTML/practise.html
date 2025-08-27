@@ -1,0 +1,118 @@
+ <!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generator Cytatów</title>
+  <style>
+    body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    text-align: center;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #333;
+}
+
+.quote-box {
+    margin: 20px 0;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+#quote {
+    font-size: 1.5em;
+    font-style: italic;
+    color: #555;
+}
+
+#author {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #333;
+    margin-top: 10px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 1em;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+  </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Generator Cytatów</h1>
+        <div class="quote-box">
+            <p id="quote">Kliknij przycisk, aby zobaczyć cytat!</p>
+            <p id="author"></p>
+        </div>
+        <button id="generate-btn">Nowy cytat</button>
+    </div>
+
+  
+    <script>
+        // Tablica z cytatami i autorami
+const quotes = [
+    {
+        quote: "Życie to coś, co przydarza się nam, gdy jesteśmy zajęci planowaniem innych rzeczy.",
+        author: "John Lennon"
+    },
+    {
+        quote: "Największą przeszkodą w życiu jest strach przed porażką.",
+        author: "Søren Kierkegaard"
+    },
+    {
+        quote: "Sukces to suma małych wysiłków, powtarzanych dzień po dniu.",
+        author: "Robert Collier"
+    },
+    {
+        quote: "Nie ma nic szlachetniejszego niż pomaganie innym.",
+        author: "Arystoteles"
+    },
+    {
+        quote: "Jeśli chcesz iść szybko, idź sam. Jeśli chcesz iść daleko, idźcie razem.",
+        author: "Afrykańskie przysłowie"
+    }
+];
+
+// Funkcja generująca losowy cytat
+function generateQuote() {
+    const randomIndex = Math.floor(Math.random() * quotes.length);
+    const randomQuote = quotes[randomIndex];
+    document.getElementById("quote").textContent = randomQuote.quote;
+    document.getElementById("author").textContent = `- ${randomQuote.author}`;
+}
+
+// Nasłuchiwanie kliknięcia przycisku
+document.getElementById("generate-btn").addEventListener("click", generateQuote);
+
+// Wygeneruj pierwszy cytat po załadowaniu strony
+generateQuote();
+    </script>
+</body>
+</html>>

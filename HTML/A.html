@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Malowanie pokoi i biur</title>
+
+    <style>
+ 
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-areas: 
+        "header header header"
+        "menu main image"
+        "footer footer footer";
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: auto 1fr auto;
+    min-height: 100vh;
+}
+
+header {
+    grid-area: header;
+    background: #aab8c5;
+    text-align: center;
+    padding: 20px;
+}
+
+.menu {
+    grid-area: menu;
+    background-color: #aab8c5;
+}
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Malowanie pokoi i biur</h1>
+        </header>
+
+        <aside class="menu">
+            <h2>Menu</h2>
+            <ul>
+                <li><a href="mieszamy.html">Mieszamy</a></li>
+                <li><a href="wyceniamy.html">Wyceniamy</a></li>
+            </ul>
+        </aside>
+
+        <main>
+            <h2>Barwy i ich pochodne</h2>
+            <table>
+                <tr>
+                    <th>Składowe</th>
+                    <th>Wynik</th>
+                </tr>
+                <tr>
+                    <td>żółty + czerwony</td>
+                    <td>pomarańczowy</td>
+                </tr>
+                <tr>
+                    <td>czerwony + niebieski</td>
+                    <td>fioletowy</td>
+                </tr>
+            </table>
+        </main>
+
+        <aside class="image">
+            <img src="obraz.jpg" alt="Kolorowy wzór">
+        </aside>
+
+        <footer>
+            <p>MALARZ</p>
+            <p>Stronę opracował: 0000000000</p>
+        </footer>
+    </div>
+
+</body>
+</html>
+

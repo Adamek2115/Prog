@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generator żartów</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+            background-color: rgba(7, 13, 165, 0.377);
+            color: rgb(8, 229, 229);
+            height: 350px;
+            width: 650px;
+            border-radius: 10px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .zarty-container {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+
+        #zarty {
+            color: #0d60b7;
+            font-size: 1.2em;
+            text-align: center;
+        }
+
+        #przycisk {
+            font-size: 1em;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 10px 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        #przycisk:hover {
+            background-color: #0056b3;
+        }
+
+        .pinata-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .pinata {
+            position: absolute;
+            font-size: 2em;
+            opacity: 0;
+            animation: explode 1.5s ease-out forwards;
+        }
+
+        @keyframes explode {
+            0% {
+                opacity: 1;
+                transform: translate(0, 0) rotate(0deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(var(--x), var(--y)) rotate(720deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Dzisiejszy żart to:</h1>
+        <div class="zarty-container">
+            <p id="zarty"></p>
+        </div>
+        <button id="przycisk">Wygeneruj żart!</button>
+    </div>
+
+    
+    <div class="pinata-container"></div>
+
+    <script>
+        const przycisk = document.getElementById('przycisk');
+        const zartyElement = document.getElementById('zarty');
+        const pinataContainer = document.querySelector('.pinata-container');
+
+        const zarty = [
+            "Dlaczego książki nie lubią się kłócić? Bo zawsze mają ostatnie słowo.",
+            "Co mówi informatyk, gdy dostanie na urodziny krawat? 'Dziękuję, ale nie mam gdzie tego podpiąć.'",
+            "Jak nazywa się wampir, który je tylko warzywa? Wegetarianin.",
+"Cowie nie lubią chemii? Bo boją się, że ktoś ich zamknie.",
+"Co mówi nauczyciel do ucznia? 'Dziękuję, że mnie wspierasz!",
+"Co mówi pizza do drugiej pizzy? 'Cześć, jak się masz, pizzko?'",
+"Dlaczego pizza nie potrafi pisać? Bo boją się, że ktoś je zje.",
+"Jak nazywa się pizza, która nie daje mleka? Mućka.",
+"Dlaczego pizza nie lubi wody? Bo boją się, że ktoś je zmoczy.",
+
+
+"Na profilu humanistycznym przynajmniej wiesz, jak rozwiązać problem moralny, ale jak zarządzać czasem? To już inna bajka,"
+,
+"Studiując na profilu humanistycznym, stajesz się mistrzem w analizowaniu tekstów, ale zapominasz analizować własne życie zawodowe,"
+,
+"Na profilu humanistycznym nauczyli mnie, jak przejść przez epokę baroku, ale wciąż nie wiem, jak przejść przez życie zawodowe,"
+,,
+"Na profilu humanistycznym nauczyłem się, że nie ma złych pytań, ale zapytaj mnie o podatki – to temat, który naprawdę mnie przeraża,"
+,
+"Studia na profilu humanistycznym to jak nauka o antycznych cywilizacjach – kiedy je poznasz, okazuje się, że nie mają nic wspólnego z dzisiejszym światem,",
+,
+"Na profilu humanistycznym masz mnóstwo teorii, ale jak już masz je zastosować w życiu, to okazuje się, że nie istnieją żadne praktyki,",
+,
+"Wszyscy mówią, że profil humanistyczny to miejsce dla kreatywnych ludzi, ale kiedy przychodzi co do czego, nie masz pojęcia, co zrobić z własnym CV,",
+
+"Na profilu humanistycznym uczysz się, jak pisać eseje o książkach, których nikt nie czytał, ale kiedy przychodzi do pisania postów na LinkedIn, już nic nie masz do powiedzenia,",
+,
+"Na profilu humanistycznym dowiedziałem się, co to jest estetyka – teraz wiem, że estetyka życia zawodowego to po prostu brak pracy,",
+,
+"Na profilu humanistycznym uczysz się, jak rozwiązać problemy społeczne, ale wciąż nie wiesz, jak rozwiązać problem znalezienia pracy,",
+,
+"Studiując na profilu humanistycznym, nauczyłem się, jak interpretować teksty literackie, ale nie wiem, jak interpretować własne życie zawodowe,",
+
+"Na profilu humanistycznym uczą cię, jak rozmawiać o sztuce, ale nie uczą cię, jak rozmawiać o płaceniu rachunków,",
+
+"Na profilu humanistycznym uczysz się, jak rozwiązywać problemy filozoficzne, ale nie masz pojęcia, jak rozwiązać problem nieodebranych telefonów od banku,",
+
+"Studiowanie na profilu humanistycznym to jak bycie na wakacjach – dużo teorii i żadnych praktycznych umiejętności do zastosowania w pracy,",
+,
+"Na profilu humanistycznym dowiedziałem się, jak rozmawiać o rewolucjach, ale nie wiem, jak zreformować swoją sytuację zawodową.",
+"Dlaczego komputer nie może wziąć wolnego? Bo zawsze jest w pracy,",
+"Co mówił matematyk do innego matematyka na imprezie? Integrujmy się,",
+"Dlaczego szewc został DJ-em? Bo miał świetne wyczucie rytmu,",
+"Czemu ryba nigdy nie mówi prawdy? Bo zawsze coś kręci w wodzie,",
+"Dlaczego bankier nosi krawat? Bo lubi być związany z pieniędzmi,",
+"Czemu drzewo nigdy nie zapomina? Bo ma dobrą pamięć w pniu,",
+"Dlaczego jabłko poszło na terapię? Bo miało problem z gniciem w sobie,",
+"Dlaczego astronom nigdy nie ziewa? Bo patrzy w gwiazdy i trzyma się wysoko,",
+"Co mówił kucharz, kiedy przypalił obiad? To będzie nowa interpretacja,",
+"Dlaczego telefon nie lubi lasu? Bo tam zawsze gubi zasięg,",
+"Czemu kot lubi komedie? Bo ma kota na punkcie śmiechu,",
+"Dlaczego nietoperz nie gra na perkusji? Bo nigdy nie uderza w coś na ślepo,",
+"Dlaczego pirat nigdy nie został artystą? Bo nie miał talentu do rysowania map,",
+"Dlaczego choinka była zawsze smutna? Bo jej życie było tylko święta i nic więcej,",
+"Dlaczego wiatrak przestał pracować? Bo się wykręcił z obowiązków,",
+"Czemu księżyc nigdy nie ma kaca? Bo pije tylko mleko,",
+"Dlaczego koty uwielbiają okna? Bo to ich reality show,",
+"Dlaczego kangur nie robił zakupów? Bo nosił wszystko w kieszeni,",
+"Czemu wulkan ma zawsze gorącą głowę? Bo nigdy się nie chłodzi,",
+"Dlaczego królik był zawsze spóźniony? Bo gubił się w zajączkach,",
+"Dlaczego dentysta lubi cukierki? Bo to zwiększa jego dochody,",
+"Czemu matematyk był kiepskim kucharzem? Bo zawsze dzielił na za małe kawałki,",
+"Dlaczego baletnica nigdy nie tańczyła na wodzie? Bo nie chciała się poślizgnąć na własnym występie,",
+"Czemu zegar się obraził? Bo ktoś go ciągle przestawiał,",
+"Dlaczego szef zawsze był w dobrym humorze? Bo czuł się jak władca czasu pracy,",
+"Dlaczego lampa zawsze miała ochotę na imprezę? Bo lubiła błyszczeć,",
+"Czemu kura zrezygnowała z kariery? Bo nie chciała być ciągle pod skrzydłami innych,",
+"Dlaczego burza nigdy nie ma przyjaciół? Bo ciągle grzmi na wszystkich,",
+"Dlaczego pszczoła zawsze była podejrzliwa? Bo miała swoje ul na oku,",
+"Czemu kalendarz był zawsze zajęty? Bo miał wszystko zapisane,",
+"Dlaczego rekin nie gra w piłkę wodną? Bo nikt nie chce być jego przeciwnikiem,",
+"Czemu duchy nigdy nie robią selfie? Bo zawsze wychodzą rozmazane,",
+"Dlaczego kot przestał śpiewać? Bo miał kocią muzykę,",
+"Dlaczego zegarek nie lubi podróżować? Bo boi się zmiany strefy czasowej,",
+"Czemu roślina nie chciała rozmawiać? Bo miała kiełkujące problemy,",
+"Dlaczego rekin nigdy nie wygrywa w grach planszowych? Bo zawsze chce coś ugryźć,",
+"Dlaczego żółw jest najspokojniejszy? Bo nigdy nie spieszy się z emocjami,",
+"Dlaczego pociąg był zły? Bo ktoś ciągle nim sterował,",
+"Czemu słoń nie został malarzem? Bo nikt nie chciał jego grubych linii,",
+"Dlaczego żaba jest świetnym piosenkarzem? Bo ma talent do skakania po dźwiękach,",
+"Dlaczego piorun nie ma telefonu? Bo nikt nie odbiera jego wyładowań,",
+"Dlaczego komputer się obraził? Bo ktoś nazwał go starą skrzynką,",
+"Czemu kurczak przekroczył drogę? Bo zobaczył drugą stronę medalu,",
+"Dlaczego roboty nie mają uczuć? Bo są zbyt zaprogramowane,",
+"Dlaczego ocean nigdy nie śpi? Bo ciągle coś się w nim faluje,",
+"Dlaczego niedźwiedź nie gra w karty? Bo nigdy nie może podnieść łapy,",
+"Dlaczego rower nie ma problemów? Bo wszystko toczy się gładko,",
+"Czemu nietoperz nie pracuje w dzień? Bo wtedy wisi na swoich sprawach,",
+"Dlaczego koty są najlepszymi filozofami? Bo zawsze patrzą w głąb siebie,",
+"Dlaczego lodówka była smutna? Bo nikt jej nie docenia, gdy jest pełna,",
+"Czemu sok pomarańczowy nigdy nie kłamie? Bo zawsze mówi prawdę do ostatniej kropli,,",
+"Dlaczego ślimak zawsze jest spóźniony? Bo nie śpieszy się na ślimaczy czas,",
+"Dlaczego pies nie lubi deszczu? Bo nie chce mokrych łap,",
+"Dlaczego pająk ma takie skomplikowane życie? Bo ciągle plącze się w swoich sprawach,,",
+"Dlaczego gwiazdy nie chodzą na imprezy? Bo zawsze trzymają dystans,",
+"Czemu książka jest najlepszym towarzyszem? Bo nigdy nie przerywa rozmowy,",
+"Dlaczego dron nie jest dobrym kucharzem? Bo ciągle kręci się w powietrzu,",
+"Dlaczego pilot śmiał się z żartów? Bo były na wysokim poziomie,",
+"Czemu śnieg nie lubi wiosny? Bo topnieje na samą myśl,",
+"Dlaczego księżyc jest samotny? Bo nie ma atmosfery,",
+"Dlaczego komputer nigdy się nie przeziębia? Bo zawsze działa na wysokich obrotach,",
+"Dlaczego jabłka są najlepszymi przyjaciółmi? Bo nigdy nie zgniją cię na śmierć,",
+"Dlaczego astronauta zawsze się uśmiecha? Bo ma kosmiczny dystans do problemów,",
+"Czemu kogut budzi wszystkich rano? Bo ma zawsze coś do powiedzenia,",
+"Dlaczego wiatrak nigdy nie stoi w miejscu? Bo ciągle kręci się w swoich sprawach,",
+"Czemu lodowiec jest taki spokojny? Bo zawsze trzyma chłodną głowę,",
+"Dlaczego pszczoły są takie zapracowane? Bo zawsze mają swoje ul do zrobienia,",
+"Dlaczego rycerz zawsze miał problemy z GPS-em? Bo ciągle wybierał okrężną drogę,",
+"Czemu słońce jest optymistą? Bo zawsze wstaje na nowo,",
+"Dlaczego długopis był w depresji? Bo czuł się wypisany,",
+"Dlaczego zapałka ma krótki lont? Bo łatwo się zapala,",
+"Czemu budzik jest taki irytujący? Bo zawsze przerywa najlepsze chwile,",
+"Dlaczego marchewka poszła do kina? Bo chciała zobaczyć dobry korzeń fabuły,",
+"Dlaczego szafa nie mówi? Bo ma wszystko zamknięte w sobie,",
+"Dlaczego góra była zmęczona? Bo ciągle ją zdobywali,",
+"Czemu latarnia nie ma marzeń? Bo tylko stoi w miejscu i świeci,",,
+"Dlaczego ocean jest taki tajemniczy? Bo nigdy nie zdradza swoich głębin,",
+"Dlaczego pies nie ma kieszeni? Bo wtedy miałby zbyt dużo szczęścia,",
+"Czemu popcorn jest taki wesoły? Bo lubi podskakiwać,",
+"Dlaczego zegar zawsze tyka? Bo jest pod presją czasu,",
+"Dlaczego księga rekordów Guinnessa ma tyle wpisów? Bo ludzie zawsze chcą być na czasie,",
+"Czemu motyl jest taki kolorowy? Bo kocha być zauważony,",
+"Dlaczego woda nigdy nie idzie na urlop? Bo zawsze jest w obiegu,",
+"Dlaczego krowa nie gra na gitarze? Bo zawsze fałszuje na mlecznej skali,",
+"Czemu statek się nie uśmiecha? Bo zawsze ma ciężkie fale,",
+"Dlaczego wino jest takie mądre? Bo z wiekiem staje się lepsze,",
+"Czemu kaktus nie lubi przytulanek? Bo czuje się wtedy spięty,",,
+"Dlaczego wiewiórka ma tyle energii? Bo zawsze ma orzechy pod ręką,",
+"Dlaczego góry nie chodzą na fitness? Bo są już w dobrej formie,",,,,
+"Dlaczego ser się śmieje? Bo ma dziury w planie,",
+"Dlaczego lodowiec ma zimny humor? Bo nigdy nie topi swoich emocji,",
+"Czemu stół nie idzie na bal? Bo ma już cztery nogi,",,
+"Dlaczego pizza ma dobry nastrój? Bo zawsze jest dobrze wypieczona,",
+"Czemu lustro nigdy się nie obraża? Bo odbija wszystkie negatywne emocje,",
+"Dlaczego żarówka jest taka bystra? Bo zawsze ma pomysł,",
+"Czemu auto ma zawsze dobry kierunek? Bo jest napędzane pozytywną energią,",
+"Dlaczego jabłka mają świetne przyjęcia? Bo są soczyste,",,
+"Dlaczego żółw nigdy się nie martwi? Bo zawsze idzie swoim tempem,",
+"Czemu okulary są zawsze modne? Bo widzą przyszłość,",,
+"Dlaczego drzewo nigdy nie kłamie? Bo ma korzenie w prawdzie,",
+"Dlaczego księżyc jest tak znany? Bo zawsze robi naświetlenie sytuacji,",
+    ]
+
+
+
+    let ostatniIndeks = -1; // Zmienna do przechowywania ostatniego wylosowanego indeksu
+
+przycisk.addEventListener('click', () => {
+    let losowyIndeks;
+
+    // Losowanie nowego indeksu z zachowaniem odstępu co najmniej 20 pozycji
+    do {
+        losowyIndeks = Math.floor(Math.random() * zarty.length);
+    } while (Math.abs(losowyIndeks - ostatniIndeks) < 20);
+
+    // Aktualizacja ostatniego indeksu
+    ostatniIndeks = losowyIndeks;
+
+    // Wyświetlenie wylosowanego żartu
+    zartyElement.textContent = zarty[losowyIndeks];
+
+    // Efekt piniaty
+    pinataContainer.innerHTML = ''; // Czyści poprzednie efekty
+    for (let i = 0; i < 50; i++) { // Tworzy 50 elementów piniaty
+        const pinata = document.createElement('div');
+        pinata.classList.add('pinata');
+
+        // Losowy emoji
+        const emoji = ['🎉', '🎊', '✨', '🌟', '💥'][Math.floor(Math.random() * 5)];
+        pinata.textContent = emoji;
+
+        // Losowe miejsce startowe
+        const startX = Math.random() * window.innerWidth; // Losowa pozycja X
+        const startY = Math.random() * window.innerHeight; // Losowa pozycja Y
+        pinata.style.left = `${startX}px`;
+        pinata.style.top = `${startY}px`;
+
+        // Losowe przesunięcie (kierunek "wystrzelenia")
+        const endX = (Math.random() * 200 - 100) * (Math.random() > 0.5 ? 1 : -1); // Losowe przesunięcie X
+        const endY = (Math.random() * 200 - 100) * (Math.random() > 0.5 ? 1 : -1); // Losowe przesunięcie Y
+        pinata.style.setProperty('--x', `${endX}px`); // Ustawia losowe przesunięcie X
+        pinata.style.setProperty('--y', `${endY}px`); // Ustawia losowe przesunięcie Y
+
+        pinataContainer.appendChild(pinata);
+    }
+});
+        </script>
+</body>
+</html>

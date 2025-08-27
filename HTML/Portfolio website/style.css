@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+html
+{
+    background-color: black;
+    font-size: large;
+   
+}
+.cześć
+{
+  font-size: 300px;
+  color: aliceblue;
+  animation: fadeScale 1.5s ease forwards;
+  opacity: 0;
+  transform-origin: center;
+  text-align: center;
+}
+
+@keyframes fadeScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.strzałki
+{
+  color: white;
+  height: 150px;
+  width: 500px;
+  position: absolute;
+  animation: moveArrows 2s ease-in-out infinite alternate;
+  font-size: 150px;
+  transform: translateX(-50%);
+  top: 65%;
+  left: 55%;
+}
+
+@keyframes moveArrows {
+  0% {
+    transform: translateX(-50%) translateY(0);
+  }
+  100% {
+    transform: translateX(-50%) translateY(20px);
+  }
+}
+
+.portfolio-text1 {
+  font-size: 200px;
+  color: aliceblue;
+  opacity: 0;
+  transition: opacity 1s ease;
+  text-align: center;
+  display: inline-block;
+  position: relative;
+  margin-top: 10%; 
+  margin-left:2% ;
+
+}
+.Opis{
+  display: inline-block;
+  margin-left: 35%;
+  color: azure;
+  font-size: larger;
+  width: 600px;
+  margin-top: 150px;
+  
+  
+}
+.Opis:hover
+{
+  color: bisque;
+  transition: 1s ease-in-out;
+}
+.menu-bar
+{
+  display: flex ;
+  align-items: flex-end;
+  flex-direction: column;
+}

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Przycisk z rozszerzającymi się bokami</title>
+    <style>
+     
+        .my-button {
+            padding: 20px 40px; /* Ustalenie początkowego paddingu */
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: transform 0.3s ease; /* Płynne przejście */
+            display: inline-block;
+            text-align: center;
+        }
+
+        /* Styl po najechaniu na przycisk */
+        .my-button:hover 
+    {
+            transform: scaleX(1.5); /* Rozszerzenie w poziomie o 50% */
+    }
+    </style>
+</head>
+<body>
+
+<button class="my-button">Kliknij mnie</button>
+
+</body>
+</html>
